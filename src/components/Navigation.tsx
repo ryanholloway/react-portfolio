@@ -1,18 +1,55 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navigation() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [gamesUnlocked, setGamesUnlocked] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
+
+  // Konami Code: ↑↑↓↓←→←→B A
+  const konamiCode = [
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "b",
+    "a",
+  ];
+  const [keySequence, setKeySequence] = useState<string[]>([]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const key =
+        e.key.toLowerCase() === "b" || e.key.toLowerCase() === "a"
+          ? e.key.toLowerCase()
+          : e.code;
+
+      const newSequence = [...keySequence, key].slice(-10);
+      setKeySequence(newSequence);
+
+      // Check if sequence matches Konami Code
+      if (newSequence.join(",") === konamiCode.join(",")) {
+        setGamesUnlocked(!gamesUnlocked);
+        setKeySequence([]);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [keySequence, gamesUnlocked]);
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Resume", path: "/resume" },
     { name: "Contact", path: "/contact" },
-    { name: "Games", path: "/games" },
+    ...(gamesUnlocked ? [{ name: "🎮 Games", path: "/games" }] : []),
   ];
 
   return (
@@ -27,7 +64,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex gap-8 items-center">
             {navLinks.map(({ name, path }) => (
               <Link
                 key={path}
@@ -41,6 +78,12 @@ export default function Navigation() {
                 {name}
               </Link>
             ))}
+            {/* Easter Egg Indicator */}
+            {gamesUnlocked && (
+              <div className="text-xs text-yellow-400 animate-pulse ml-4 px-2 py-1 rounded bg-yellow-900 bg-opacity-30">
+                Secret Unlocked 🔓
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -81,6 +124,11 @@ export default function Navigation() {
                 {name}
               </Link>
             ))}
+            {gamesUnlocked && (
+              <div className="px-4 py-2 text-xs text-yellow-400 bg-yellow-900 bg-opacity-30 rounded animate-pulse">
+                Secret Unlocked 🔓
+              </div>
+            )}
           </div>
         )}
       </div>
