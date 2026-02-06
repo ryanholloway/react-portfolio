@@ -60,7 +60,7 @@ export default function Navigation() {
             to="/"
             className="text-2xl font-bold text-blue-400 hover:text-blue-300 transition"
           >
-            ryancholloway.com
+            Ryan Holloway
           </Link>
 
           {/* Desktop Menu */}

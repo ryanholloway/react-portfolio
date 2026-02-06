@@ -16,6 +16,23 @@ export default function Portfolio() {
   const projects: Project[] = [
     {
       id: 1,
+      title: "GoDo - The Bucket List App",
+      description:
+        "Developed a full-stack bucket list tracking app as a personal project to showcase modern web development skills. GoDo helps users capture life goals, track progress with visual milestones, and celebrate achievements across devices. Features a responsive landing page built with React 18, TypeScript, Vite, Material-UI (MUI v5), and Framer Motion for smooth animations. The core app is a cross-platform PWA in development with offline support, progress visualization, and social sharing capabilities.",
+      tags: [
+        "React 18",
+        "TypeScript",
+        "Vite",
+        "Material-UI",
+        "Framer Motion",
+        "PWA",
+        "Vercel",
+      ],
+      link: "https://getgodo.net",
+      inProgress: true,
+    },
+    {
+      id: 2,
       title: "Zombie Survival Shooter - Joint Module End of Year 2",
       description:
         "A comprehensive 4-module joint project developing a zombie survival shooter with life mechanics (thirst, hunger). Features a spatial partition system for efficient collision detection, procedurally generated maps using Perlin Noise, advanced 2D lighting with Candle library, and a full level editor. Implemented survival mechanics with randomly spawned resource pickups and dynamic enemy AI.",
@@ -33,7 +50,7 @@ export default function Portfolio() {
       inProgress: false,
     },
     {
-      id: 2,
+      id: 3,
       title: "3D Cube Game - OpenGL & SFML (First Class)",
       description:
         "A challenging OpenGL and SFML project creating a scrolling cube game where only same-colored cubes interact. Developed custom Command Pattern for unified input handling between keyboard and controller. Implemented controller support with gamepad integration, audio system with soundtrack and sound effects, and intuitive gameplay mechanics. Achieved First Class Grade.",
@@ -52,7 +69,7 @@ export default function Portfolio() {
       inProgress: false,
     },
     {
-      id: 3,
+      id: 4,
       title: "YOLO Object Detection with Raspberry Pi 5",
       description:
         "Implemented real-time card detection using YOLO v11 with AI accelerator hat and camera module 3. Optimized for low-latency JSON/JPG streaming over USB with custom UI. Explored CUDA OpenCV performance optimization and resolution tuning (320p) for efficient CPU utilization.",
@@ -69,7 +86,7 @@ export default function Portfolio() {
       inProgress: true,
     },
     {
-      id: 4,
+      id: 5,
       title: "Progressive Web App at Netwatch",
       description:
         "Developed responsive PWA using React and TypeScript with GraphQL backend integration. Implemented service workers for offline functionality and native-like app behavior. Built authentication systems and complex state management with full responsive design.",
@@ -85,7 +102,7 @@ export default function Portfolio() {
       inProgress: false,
     },
     {
-      id: 5,
+      id: 6,
       title: "Docker Media Server Stack",
       description:
         "Orchestrated containerized media management system using Docker Compose. Integrated DVD/Blu-ray ripping, automated sorting, and multi-service coordination. Built sophisticated container networking and volume management for home automation solutions.",
