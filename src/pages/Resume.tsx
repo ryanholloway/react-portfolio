@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 export default function Resume() {
   const experience = [
     {
+      id: "netwatch-sda-2025",
       role: "Software Development Assistant",
       company: "Netwatch",
       period: "September 2025 - Present",
@@ -10,6 +11,7 @@ export default function Resume() {
         "React/TypeScript frontend development for Progressive Web Apps. Authentication systems, database integration, responsive design, and service worker implementation for offline functionality.",
     },
     {
+      id: "netwatch-intern-2025",
       role: "Software Engineering Intern",
       company: "Netwatch",
       period: "January 2025 - August 2025",
@@ -17,6 +19,7 @@ export default function Resume() {
         "Developed scaled-down PWA version of existing Web App. Collaborated on innovative .NET proof-of-concept projects. Gained hands-on exposure to modern web technologies, agile methodologies, and collaborative development.",
     },
     {
+      id: "teagasc-seasonal-2024",
       role: "Temporary Seasonal Worker",
       company: "Teagasc, Carlow",
       period: "June 2024 - July 2024",
@@ -24,6 +27,7 @@ export default function Resume() {
         "6-week internship with the Potato Research Group. Conducted potato virus testing using Enzyme-linked immunosorbent assay (ELISA). Balanced field work and lab work in agricultural research environment.",
     },
     {
+      id: "msd-dmo-2023",
       role: "Digital Manufacturing Operative Intern",
       company: "MSD, Carlow",
       period: "June 2023 - August 2023",
@@ -104,6 +108,7 @@ export default function Resume() {
 
   const education = [
     {
+      id: "setu-carlow-bsc-2022",
       degree: "BSc Computer Science (Game Development)",
       school: "SETU Carlow",
       period: "September 2022 - May 2026",
@@ -117,6 +122,7 @@ export default function Resume() {
       ],
     },
     {
+      id: "harvardx-intro-cs-2025",
       degree: "Intro to Computer Science",
       school: "HarvardX (Online)",
       period: "June 2025 - December 2025",
@@ -126,17 +132,32 @@ export default function Resume() {
 
   const awards = [
     {
+      id: "cty-2017",
       title: "Centre For Talented Youth, Ireland",
       year: "2017",
       description:
         "Prestigious youth program award for students of high academic ability. Awarded for exceptional ability in Mathematics.",
     },
     {
+      id: "haccp-2021",
       title: "HACCP Training Certification",
       year: "2021",
       description: "Food safety and hazard analysis certification.",
     },
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { scale: 1, opacity: 1 },
+  };
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 py-20 px-4 sm:px-6 lg:px-8">
@@ -149,7 +170,7 @@ export default function Resume() {
           <h1 className="text-5xl font-bold mb-4">Resume</h1>
           <a
             href="/resume.pdf"
-            className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition font-semibold"
+            className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors font-semibold"
           >
             Download PDF
           </a>
@@ -157,22 +178,26 @@ export default function Resume() {
 
         {/* Experience */}
         <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
           className="mb-16 w-full"
         >
           <h2 className="text-3xl font-bold mb-8 text-blue-400">
             Work Experience
           </h2>
-          <div className="space-y-6 w-full">
-            {experience.map((exp, i) => (
+          <motion.div
+            className="space-y-6 w-full"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {experience.map((exp) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 * (i + 1) }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition w-full"
+                key={exp.id}
+                variants={itemVariants}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
               >
                 <h3 className="text-xl font-bold text-white">{exp.role}</h3>
                 <p className="text-blue-400 font-semibold text-sm">
@@ -182,27 +207,31 @@ export default function Resume() {
                 <p className="text-gray-300">{exp.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
 
         {/* Skills */}
         <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
           className="mb-16 w-full"
         >
           <h2 className="text-3xl font-bold mb-8 text-blue-400">
             Skills & Technologies
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full">
-            {skills.map((skillGroup, i) => (
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {skills.map((skillGroup) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 * (i + 1) }}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition w-full"
+                key={skillGroup.category}
+                variants={itemVariants}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
               >
                 <h3 className="text-lg font-bold mb-4 text-blue-400">
                   {skillGroup.category}
@@ -211,7 +240,7 @@ export default function Resume() {
                   {skillGroup.items.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-2 bg-blue-900 bg-opacity-50 text-blue-300 rounded-full text-sm hover:bg-opacity-100 transition whitespace-nowrap"
+                      className="px-3 py-2 bg-blue-900 bg-opacity-50 text-blue-300 rounded-full text-sm hover:bg-opacity-100 transition-colors whitespace-nowrap"
                     >
                       {skill}
                     </span>
@@ -219,25 +248,29 @@ export default function Resume() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
 
         {/* Education */}
         <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
           className="mb-16 w-full"
         >
           <h2 className="text-3xl font-bold mb-8 text-blue-400">Education</h2>
-          <div className="space-y-6 w-full">
-            {education.map((edu, i) => (
+          <motion.div
+            className="space-y-6 w-full"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {education.map((edu) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * (i + 1) }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition w-full"
+                key={edu.id}
+                variants={itemVariants}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
               >
                 <h3 className="text-xl font-bold text-white">{edu.degree}</h3>
                 <p className="text-blue-400 font-semibold text-sm">
@@ -259,27 +292,31 @@ export default function Resume() {
                 )}
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
 
         {/* Awards & Recognition */}
         <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
           className="w-full"
         >
           <h2 className="text-3xl font-bold mb-8 text-blue-400">
             Awards & Recognition
           </h2>
-          <div className="space-y-6 w-full">
-            {awards.map((award, i) => (
+          <motion.div
+            className="space-y-6 w-full"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {awards.map((award) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * (i + 1) }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition w-full"
+                key={award.id}
+                variants={itemVariants}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
               >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-bold text-white">
@@ -292,7 +329,7 @@ export default function Resume() {
                 <p className="text-gray-300">{award.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
       </div>
     </div>

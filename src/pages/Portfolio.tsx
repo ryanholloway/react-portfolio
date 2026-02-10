@@ -126,8 +126,8 @@ export default function Portfolio() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { scale: 1, opacity: 1 },
   };
 
   return (
@@ -156,6 +156,7 @@ export default function Portfolio() {
               key={project.id}
               variants={itemVariants}
               className="w-full"
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <ProjectCard project={project} />
             </motion.div>

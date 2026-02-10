@@ -74,7 +74,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.div
-      className="group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:border-blue-500 transition cursor-pointer"
+      className="group relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:border-blue-500 transition-colors cursor-pointer h-full flex flex-col"
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
@@ -93,7 +93,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Video Section */}
       {project.video ? (
-        <div className="relative w-full bg-black aspect-video">
+        <div className="relative w-full bg-black aspect-video shrink-0">
           <video
             ref={videoRef}
             className="w-full h-full object-contain"
@@ -220,29 +220,55 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       ) : (
-        <div className="relative w-full bg-black aspect-video flex items-center justify-center">
-          <div className="text-center text-gray-500">
-            <svg
-              className="w-24 h-24 mx-auto mb-4 opacity-30"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-            <p className="text-sm font-semibold opacity-70">No Preview Available</p>
+        <div className="relative w-full aspect-video shrink-0 overflow-hidden">
+          {/* Neutral placeholder background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950" />
+          {/* Subtle grid pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(59,130,246,0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(59,130,246,0.45) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+          {/* Soft vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/20" />
+
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-sm">
+                <svg
+                  className="w-6 h-6 text-blue-300/70"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.8}
+                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.8}
+                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <p className="text-xs font-semibold tracking-wide text-gray-300/80">
+                Preview coming soon
+              </p>
+            </div>
           </div>
         </div>
       )}
 
-      <div className="p-6 h-full flex flex-col justify-between">
-        <div>
-          <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-blue-400 transition">
+      <div className="p-6 flex-1 flex flex-col">
+        <div className="flex-1">
+          <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">
             {project.title}
           </h3>
           <p className="text-gray-400 mb-6 leading-relaxed">
@@ -255,7 +281,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 bg-blue-900 bg-opacity-50 text-blue-300 rounded-full text-sm hover:bg-opacity-100 transition"
+                className="px-3 py-1 bg-blue-900 bg-opacity-50 text-blue-300 rounded-full text-sm hover:bg-opacity-100 transition-colors"
               >
                 {tag}
               </span>
