@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
-interface Project {
+export interface Project {
   id: number;
   title: string;
   description: string;
@@ -9,6 +9,7 @@ interface Project {
   link?: string;
   github?: string;
   video?: string;
+  image?: string;
   inProgress?: boolean;
 }
 
@@ -91,6 +92,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       )}
 
+      {project.image && !project.video && (
+        <div className="relative w-full aspect-video shrink-0">
+          <img
+            src={project.image}
+            alt={`${project.title} preview`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+
       {/* Video Section */}
       {project.video ? (
         <div className="relative w-full bg-black aspect-video shrink-0">
@@ -103,32 +114,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <source src={project.video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-
-          {/* Video Controls Overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <button
-              onClick={togglePlayPause}
-              className="w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition transform hover:scale-110 shadow-lg"
-            >
-              {isPlaying ? (
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
-          </div>
 
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black to-transparent pt-12 pb-3 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <div
@@ -220,50 +205,52 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       ) : (
-        <div className="relative w-full aspect-video shrink-0 overflow-hidden">
-          {/* Neutral placeholder background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950" />
-          {/* Subtle grid pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, rgba(59,130,246,0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(59,130,246,0.45) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-            }}
-          />
-          {/* Soft vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/20" />
+        !project.image && (
+          <div className="relative w-full aspect-video shrink-0 overflow-hidden">
+            {/* Neutral placeholder background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950" />
+            {/* Subtle grid pattern */}
+            <div
+              className="absolute inset-0 opacity-[0.08]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, rgba(59,130,246,0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(59,130,246,0.45) 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+              }}
+            />
+            {/* Soft vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/20" />
 
-          <div className="relative h-full w-full flex items-center justify-center">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-sm">
-                <svg
-                  className="w-6 h-6 text-blue-300/70"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.8}
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.8}
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+            <div className="relative h-full w-full flex items-center justify-center">
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-sm">
+                  <svg
+                    className="w-6 h-6 text-blue-300/70"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.8}
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.8}
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <p className="text-xs font-semibold tracking-wide text-gray-300/80">
+                  Preview coming soon
+                </p>
               </div>
-              <p className="text-xs font-semibold tracking-wide text-gray-300/80">
-                Preview coming soon
-              </p>
             </div>
           </div>
-        </div>
+        )
       )}
 
       <div className="p-6 flex-1 flex flex-col">

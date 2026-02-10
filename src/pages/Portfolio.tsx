@@ -1,16 +1,5 @@
 import { motion } from "framer-motion";
-import ProjectCard from "../components/ProjectCard";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  link?: string;
-  github?: string;
-  video?: string;
-  inProgress?: boolean;
-}
+import ProjectCard, { type Project } from "../components/ProjectCard";
 
 export default function Portfolio() {
   const projects: Project[] = [
@@ -27,7 +16,9 @@ export default function Portfolio() {
         "Framer Motion",
         "PWA",
         "Vercel",
+        "Firebase",
       ],
+      image: "godo.png",
       link: "https://getgodo.net",
       inProgress: true,
     },
@@ -80,9 +71,11 @@ export default function Portfolio() {
         "Computer Vision",
         "OpenCV",
         "AI Accelerator",
+        "Flask API",
       ],
       github: "https://github.com/ryanholloway/yolo-frame-processing-api",
       video: "",
+      image: "yolo.png",
       inProgress: true,
     },
     {
@@ -112,6 +105,10 @@ export default function Portfolio() {
         "Linux",
         "Home Automation",
         "Container Orchestration",
+        "Jellyfin",
+        "Radarr",
+        "Sonarr",
+        "Jellyseerr",
       ],
       inProgress: false,
     },
