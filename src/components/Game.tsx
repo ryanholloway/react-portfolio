@@ -35,7 +35,7 @@ class GameScene extends Phaser.Scene {
     }
 
     // Player
-    this.player = this.add.rectangle(300, 650, 40, 40, 0x3b82f6);
+    this.player = this.add.rectangle(300, 650, 40, 40, 0xeee8dc);
     this.physics.add.existing(this.player);
     (this.player.body as Phaser.Physics.Arcade.Body).setCollideWorldBounds(
       true
@@ -53,7 +53,7 @@ class GameScene extends Phaser.Scene {
           50 + y * 60,
           40,
           30,
-          0xef4444
+          0xc4421e
         );
         this.physics.add.existing(enemy);
         (enemy.body as Phaser.Physics.Arcade.Body).setVelocity(100, 0);
@@ -64,7 +64,7 @@ class GameScene extends Phaser.Scene {
     // Score text - single one at top left
     this.scoreText = this.add.text(10, 10, "Score: 0", {
       fontSize: "16px",
-      color: "#ffffff",
+      color: "#eee8dc",
     });
   }
 
@@ -90,7 +90,7 @@ class GameScene extends Phaser.Scene {
         this.player.y - 25,
         5,
         15,
-        0x60a5fa
+        0xeee8dc
       );
       this.physics.add.existing(bullet);
       (bullet.body as Phaser.Physics.Arcade.Body).setVelocity(0, -500);
@@ -160,14 +160,14 @@ class GameScene extends Phaser.Scene {
     // Check if enemies reached bottom (game over)
     for (const enemy of this.enemies) {
       if (enemy.y > 700) {
-        this.endGame(`GAME OVER! Score: ${this.score}`, "#ef4444");
+        this.endGame(`GAME OVER! Score: ${this.score}`, "#c4421e");
         return;
       }
     }
 
     // Win condition
     if (this.enemies.length === 0 && this.score > 0) {
-      this.endGame(`YOU WIN! Score: ${this.score}`, "#10b981");
+      this.endGame(`YOU WIN! Score: ${this.score}`, "#eee8dc");
     }
   }
 
@@ -186,9 +186,9 @@ class GameScene extends Phaser.Scene {
     // Add restart button
     this.restartButton = this.add.text(300, 420, "Press R to Restart", {
       fontSize: "18px",
-      color: "#3b82f6",
+      color: "#171410",
       align: "center",
-      backgroundColor: "#1e293b",
+      backgroundColor: "#eee8dc",
       padding: { x: 20, y: 10 },
     });
     this.restartButton.setOrigin(0.5);
@@ -205,11 +205,11 @@ class GameScene extends Phaser.Scene {
     });
 
     this.restartButton.on("pointerover", () => {
-      this.restartButton.setStyle({ color: "#60a5fa" });
+      this.restartButton.setStyle({ color: "#c4421e" });
     });
 
     this.restartButton.on("pointerout", () => {
-      this.restartButton.setStyle({ color: "#3b82f6" });
+      this.restartButton.setStyle({ color: "#171410" });
     });
   }
 }
@@ -225,7 +225,11 @@ const GameComponent = () => {
         parent: gameContainerRef.current,
         width: 600,
         height: 700,
-        backgroundColor: "#111827",
+        scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+        },
+        backgroundColor: "#171410",
         physics: {
           default: "arcade",
           arcade: {
@@ -254,8 +258,9 @@ const GameComponent = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        margin: "20px auto",
-        borderRadius: "8px",
+        width: "100%",
+        maxWidth: "600px",
+        margin: "0 auto",
         overflow: "hidden",
       }}
     />

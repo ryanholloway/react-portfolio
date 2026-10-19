@@ -11,7 +11,7 @@ import "./styles/globals.css";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+      <div className="flex flex-col min-h-screen bg-paper text-ink">
         <Navigation />
         <main className="flex-grow w-full">
           <Routes>

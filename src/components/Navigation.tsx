@@ -49,75 +49,67 @@ export default function Navigation() {
     { name: "Portfolio", path: "/portfolio" },
     { name: "Resume", path: "/resume" },
     { name: "Contact", path: "/contact" },
-    ...(gamesUnlocked ? [{ name: "🎮 Games", path: "/games" }] : []),
+    ...(gamesUnlocked ? [{ name: "Games", path: "/games" }] : []),
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-gray-950 border-b border-gray-800 shadow-lg">
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 bg-paper border-b border-ink">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link
             to="/"
-            className="text-2xl font-bold text-blue-400 hover:text-blue-300 transition"
+            className="font-display text-xl font-extrabold tracking-tight hover:text-accent transition-colors active:opacity-70"
           >
             Ryan Holloway
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8 items-center">
+          <nav className="hidden md:flex gap-8 items-center">
             {navLinks.map(({ name, path }) => (
               <Link
                 key={path}
                 to={path}
-                className={`relative font-medium transition ${
+                aria-current={isActive(path) ? "page" : undefined}
+                className={`text-xs uppercase tracking-widest py-1 border-b-2 transition-colors active:opacity-70 ${
                   isActive(path)
-                    ? "text-blue-400"
-                    : "text-gray-300 hover:text-blue-400"
-                } after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all hover:after:w-full`}
+                    ? "border-accent text-ink"
+                    : "border-transparent text-muted hover:text-ink hover:border-ink"
+                }`}
               >
                 {name}
               </Link>
             ))}
-            {/* Easter Egg Indicator */}
             {gamesUnlocked && (
-              <div className="text-xs text-yellow-400 animate-pulse ml-4 px-2 py-1 rounded bg-yellow-900 bg-opacity-30">
-                Secret Unlocked 🔓
-              </div>
+              <span className="text-xs uppercase tracking-widest text-accent">
+                [ Unlocked ]
+              </span>
             )}
-          </div>
+          </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            className="md:hidden text-ink border border-ink px-3 py-1.5 text-xs uppercase tracking-widest active:bg-ink active:text-paper transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            {isOpen ? "Close" : "Menu"}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 space-y-2">
+          <nav className="md:hidden border-t border-ink -mx-4 sm:-mx-6 lg:-mx-8">
             {navLinks.map(({ name, path }) => (
               <Link
                 key={path}
                 to={path}
-                className={`block px-4 py-2 rounded transition ${
+                aria-current={isActive(path) ? "page" : undefined}
+                className={`block px-4 sm:px-6 lg:px-8 py-4 border-b border-ink text-sm uppercase tracking-widest transition-colors active:bg-ink active:text-paper ${
                   isActive(path)
-                    ? "bg-blue-900 text-blue-400"
-                    : "text-gray-300 hover:bg-gray-800"
+                    ? "text-accent"
+                    : "text-ink hover:text-accent"
                 }`}
                 onClick={() => setIsOpen(false)}
               >
@@ -125,13 +117,13 @@ export default function Navigation() {
               </Link>
             ))}
             {gamesUnlocked && (
-              <div className="px-4 py-2 text-xs text-yellow-400 bg-yellow-900 bg-opacity-30 rounded animate-pulse">
-                Secret Unlocked 🔓
+              <div className="px-4 sm:px-6 lg:px-8 py-3 text-xs uppercase tracking-widest text-accent">
+                [ Unlocked ]
               </div>
             )}
-          </div>
+          </nav>
         )}
       </div>
-    </nav>
+    </header>
   );
 }
