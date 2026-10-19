@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 export default function Resume() {
   const experience = [
     {
@@ -113,7 +111,7 @@ export default function Resume() {
       school: "SETU Carlow",
       period: "September 2022 - May 2026",
       details:
-        "Expected First Class Honours (1.1). Year 1: 78.2% GPA, Year 2: 79.3% GPA, Year 3: 70%",
+        "First Class Honours (1.1). Year 1: 78.2% GPA, Year 2: 79.3% GPA, Year 3: 70%, Year 4: 70%",
       subjects: [
         "Web Development & Databases",
         "3D Graphics",
@@ -144,193 +142,147 @@ export default function Resume() {
       year: "2021",
       description: "Food safety and hazard analysis certification.",
     },
+    {
+      id: "claude-101",
+      title: "Claude 101",
+      year: "2026",
+      description: "Certification for Claude 101.",
+    },
+    {
+      id: "claude-code-101",
+      title: "Claude Code 101",
+      year: "2026",
+      description: "Certification for Claude Code 101.",
+    },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { scale: 1, opacity: 1 },
-  };
-
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 py-20 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl font-bold mb-4">Resume</h1>
-          <a
-            href="/resume.pdf"
-            className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors font-semibold"
-          >
-            Download PDF
-          </a>
-        </motion.div>
+    <div className="w-full px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-24">
+      <div className="max-w-6xl mx-auto">
+        <header className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8 pb-12 md:pb-16">
+          <h1 className="md:col-span-8 text-[clamp(3.25rem,9vw,7.5rem)] leading-[0.9]">
+            Resume
+          </h1>
+          <div className="md:col-span-4 md:self-end">
+            <a
+              href="/resume.pdf"
+              className="inline-flex w-full sm:w-auto justify-center items-center bg-ink text-paper px-7 py-4 text-sm uppercase tracking-widest hover:bg-accent active:translate-y-px transition-colors"
+            >
+              Download PDF ↓
+            </a>
+          </div>
+        </header>
 
         {/* Experience */}
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
-          className="mb-16 w-full"
-        >
-          <h2 className="text-3xl font-bold mb-8 text-blue-400">
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-6 border-t border-ink py-12">
+          <h2 className="md:col-span-3 text-xs uppercase tracking-widest text-muted">
             Work Experience
           </h2>
-          <motion.div
-            className="space-y-6 w-full"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
+          <div className="md:col-span-9 divide-y divide-ink">
             {experience.map((exp) => (
-              <motion.div
+              <div
                 key={exp.id}
-                variants={itemVariants}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
+                className="py-8 first:pt-0 last:pb-0 grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-3"
               >
-                <h3 className="text-xl font-bold text-white">{exp.role}</h3>
-                <p className="text-blue-400 font-semibold text-sm">
-                  {exp.company}
+                <div className="sm:col-span-8">
+                  <h3 className="text-2xl md:text-3xl">{exp.role}</h3>
+                  <p className="mt-2 text-sm uppercase tracking-widest text-accent">
+                    {exp.company}
+                  </p>
+                </div>
+                <p className="sm:col-span-4 sm:text-right text-xs uppercase tracking-widest text-muted sm:pt-2">
+                  {exp.period}
                 </p>
-                <p className="text-gray-400 text-sm mb-3">{exp.period}</p>
-                <p className="text-gray-300">{exp.description}</p>
-              </motion.div>
+                <p className="sm:col-span-12 text-muted leading-relaxed max-w-3xl">
+                  {exp.description}
+                </p>
+              </div>
             ))}
-          </motion.div>
-        </motion.section>
+          </div>
+        </section>
 
         {/* Skills */}
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-          className="mb-16 w-full"
-        >
-          <h2 className="text-3xl font-bold mb-8 text-blue-400">
-            Skills & Technologies
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-6 border-t border-ink py-12">
+          <h2 className="md:col-span-3 text-xs uppercase tracking-widest text-muted">
+            Skills &amp; Technologies
           </h2>
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {skills.map((skillGroup) => (
-              <motion.div
-                key={skillGroup.category}
-                variants={itemVariants}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
+          <dl className="md:col-span-9 divide-y divide-ink border-b border-ink">
+            {skills.map((group) => (
+              <div
+                key={group.category}
+                className="py-5 grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-2"
               >
-                <h3 className="text-lg font-bold mb-4 text-blue-400">
-                  {skillGroup.category}
-                </h3>
-                <div className="flex flex-wrap gap-2 justify-start">
-                  {skillGroup.items.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-2 bg-blue-900 bg-opacity-50 text-blue-300 rounded-full text-sm hover:bg-opacity-100 transition-colors whitespace-nowrap"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                <dt className="sm:col-span-4 text-sm font-semibold">
+                  {group.category}
+                </dt>
+                <dd className="sm:col-span-8">
+                  <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+                    {group.items.map((skill) => (
+                      <li
+                        key={skill}
+                        className="whitespace-nowrap after:content-['/'] after:ml-4 after:text-ink/30 last:after:content-none"
+                      >
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
             ))}
-          </motion.div>
-        </motion.section>
+          </dl>
+        </section>
 
         {/* Education */}
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
-          className="mb-16 w-full"
-        >
-          <h2 className="text-3xl font-bold mb-8 text-blue-400">Education</h2>
-          <motion.div
-            className="space-y-6 w-full"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-6 border-t border-ink py-12">
+          <h2 className="md:col-span-3 text-xs uppercase tracking-widest text-muted">
+            Education
+          </h2>
+          <div className="md:col-span-9 divide-y divide-ink">
             {education.map((edu) => (
-              <motion.div
-                key={edu.id}
-                variants={itemVariants}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
-              >
-                <h3 className="text-xl font-bold text-white">{edu.degree}</h3>
-                <p className="text-blue-400 font-semibold text-sm">
+              <div key={edu.id} className="py-8 first:pt-0 last:pb-0">
+                <h3 className="text-2xl md:text-3xl">{edu.degree}</h3>
+                <p className="mt-2 text-sm uppercase tracking-widest text-accent">
                   {edu.school}
                 </p>
-                <p className="text-gray-400 text-sm mb-2">{edu.period}</p>
-                <p className="text-gray-300 text-sm mb-3">{edu.details}</p>
+                <p className="mt-1 text-xs uppercase tracking-widest text-muted">
+                  {edu.period}
+                </p>
+                <p className="mt-4 text-sm text-muted leading-relaxed max-w-3xl">
+                  {edu.details}
+                </p>
                 {edu.subjects && (
-                  <div className="flex flex-wrap gap-2">
+                  <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-wider text-ink/70">
                     {edu.subjects.map((subject) => (
-                      <span
-                        key={subject}
-                        className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs"
-                      >
-                        {subject}
-                      </span>
+                      <li key={subject}>{subject}</li>
                     ))}
-                  </div>
+                  </ul>
                 )}
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </motion.section>
+          </div>
+        </section>
 
-        {/* Awards & Recognition */}
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
-          className="w-full"
-        >
-          <h2 className="text-3xl font-bold mb-8 text-blue-400">
-            Awards & Recognition
+        {/* Awards */}
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-6 border-t border-b border-ink py-12">
+          <h2 className="md:col-span-3 text-xs uppercase tracking-widest text-muted">
+            Awards &amp; Recognition
           </h2>
-          <motion.div
-            className="space-y-6 w-full"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
+          <div className="md:col-span-9 divide-y divide-ink">
             {awards.map((award) => (
-              <motion.div
-                key={award.id}
-                variants={itemVariants}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors w-full"
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-white">
-                    {award.title}
-                  </h3>
-                  <span className="text-blue-400 font-semibold text-sm">
+              <div key={award.id} className="py-8 first:pt-0 last:pb-0">
+                <div className="flex justify-between items-baseline gap-6">
+                  <h3 className="text-2xl md:text-3xl">{award.title}</h3>
+                  <span className="shrink-0 tabular-nums text-sm text-accent">
                     {award.year}
                   </span>
                 </div>
-                <p className="text-gray-300">{award.description}</p>
-              </motion.div>
+                <p className="mt-3 text-muted leading-relaxed max-w-3xl">
+                  {award.description}
+                </p>
+              </div>
             ))}
-          </motion.div>
-        </motion.section>
+          </div>
+        </section>
       </div>
     </div>
   );
